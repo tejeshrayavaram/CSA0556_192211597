@@ -1,0 +1,90 @@
+mysql>
+mysql> use tejesh;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_tejesh |
++------------------+
+| department       |
+| mentees          |
+| student          |
++------------------+
+3 rows in set (0.11 sec)
+
+mysql> select*from mentees;
++------------+----------+------+----------+------------+
+| Regno      | Name     | Dept | Addess   | Fathername |
++------------+----------+------+----------+------------+
+|  192125122 | kamalesh | CSE  | Erode    | moorthi    |
+| 1922115936 | guru     | BME  | piler    | murthy     |
+| 1922115936 | Dhora    | BME  | chittoor | Ramu       |
+| 1922114856 | Jithu    | CSE  | mpl      | Ashok      |
++------------+----------+------+----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> selete *from mentees where Dept='ECE';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selete *from mentees where Dept='ECE'' at line 1
+mysql> select *from mentees where Dept='ECE';
+Empty set (0.00 sec)
+
+mysql> select *from mentees where Dept='CSE';
++------------+----------+------+--------+------------+
+| Regno      | Name     | Dept | Addess | Fathername |
++------------+----------+------+--------+------------+
+|  192125122 | kamalesh | CSE  | Erode  | moorthi    |
+| 1922114856 | Jithu    | CSE  | mpl    | Ashok      |
++------------+----------+------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table menteesadd marks int(3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'marks int(3)' at line 1
+mysql> alter table mentees add marksint(3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(3)' at line 1
+mysql> alter table mentees add marks int(3);
+Query OK, 0 rows affected, 1 warning (0.41 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> update mentees set marks=99 where Dept="CSE";
+Query OK, 2 rows affected (0.09 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update mentees set marks=89 where Dept="BME";
+Query OK, 2 rows affected (0.08 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select* from mentees;
++------------+----------+------+----------+------------+-------+
+| Regno      | Name     | Dept | Addess   | Fathername | marks |
++------------+----------+------+----------+------------+-------+
+|  192125122 | kamalesh | CSE  | Erode    | moorthi    |    99 |
+| 1922115936 | guru     | BME  | piler    | murthy     |    89 |
+| 1922115936 | Dhora    | BME  | chittoor | Ramu       |    89 |
+| 1922114856 | Jithu    | CSE  | mpl      | Ashok      |    99 |
++------------+----------+------+----------+------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select* from mentees Name like 'k%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like 'k%'' at line 1
+mysql> select* from mentees Name like 'G%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like 'G%'' at line 1
+mysql>  select* from mentees where Name like 'k%';
++-----------+----------+------+--------+------------+-------+
+| Regno     | Name     | Dept | Addess | Fathername | marks |
++-----------+----------+------+--------+------------+-------+
+| 192125122 | kamalesh | CSE  | Erode  | moorthi    |    99 |
++-----------+----------+------+--------+------------+-------+
+1 row in set (0.11 sec)
+
+mysql> select*from mentees where Name like 'i%';
+Empty set (0.00 sec)
+
+
+mysql>  select *from mentees where Addess like 'E___e';
++-----------+----------+------+--------+------------+-------+
+| Regno     | Name     | Dept | Addess | Fathername | marks |
++-----------+----------+------+--------+------------+-------+
+| 192125122 | kamalesh | CSE  | Erode  | moorthi    |    99 |
++-----------+----------+------+--------+------------+-------+
+1 row in set (0.00 sec)
+
+mysql>

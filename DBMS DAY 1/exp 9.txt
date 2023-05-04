@@ -1,0 +1,175 @@
+mysql> use tejesh
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_tejesh |
++------------------+
+| department       |
+| mentees          |
+| student          |
++------------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from mentees;
++------------+----------+------+----------+------------+-------+---------+
+| Regno      | Name     | Dept | Addess   | Fathername | marks | subject |
++------------+----------+------+----------+------------+-------+---------+
+|  192125122 | kamalesh | CSE  | Erode    | moorthi    |    99 | NULL    |
+| 1922115936 | guru     | BME  | piler    | murthy     |    89 | BIOEVS  |
+| 1922115936 | Dhora    | BME  | chittoor | Ramu       |    89 | BIOEVS  |
+| 1922114856 | Jithu    | CSE  | mpl      | Ashok      |    99 | NULL    |
++------------+----------+------+----------+------------+-------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select Regno,Name from mentees where Name IN(select Name from mentees where Dept="CSE";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select Regno,Name from mentees where Name IN(select Name from mentees where Dept="BIOEVS";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select Regno,Name from mentees where Name IN(select Name from mentees where Dept="CSE");
++------------+----------+
+| Regno      | Name     |
++------------+----------+
+|  192125122 | kamalesh |
+| 1922114856 | Jithu    |
++------------+----------+
+2 rows in set (0.09 sec)
+
+mysql> create table mentees1(Id int(10),Name varchar(20));
+Query OK, 0 rows affected, 1 warning (0.20 sec)
+
+mysql> insert into mentees1(Id,Name)
+    -> select Regno,Name
+    -> from mentees where Dept="CSE";
+Query OK, 2 rows affected (0.15 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select*from mentees1;
++------------+----------+
+| Id         | Name     |
++------------+----------+
+|  192125122 | kamalesh |
+| 1922114856 | Jithu    |
++------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select Regno,(select Name frrom mentees where Id=192125122)as Name,Dept,addess,fathername,marks,subject from mentees where Regno=192125122;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mentees where Id=192125122)as Name,Dept,addess,fathername,marks,subject from men' at line 1
+mysql>  select Regno,(select Name from mentees where Id=192125122)as Name,Dept,addess,Fathername,marks,subject from mentees where Regno=192125122;
+ERROR 1054 (42S22): Unknown column 'Id' in 'where clause'
+mysql>  select Regno,(select Name from mentees1 where Id=192125122)as Name,Dept,addess,Fathername,marks,subject from mentees where Regno=192125122;
++-----------+----------+------+--------+------------+-------+---------+
+| Regno     | Name     | Dept | addess | Fathername | marks | subject |
++-----------+----------+------+--------+------------+-------+---------+
+| 192125122 | kamalesh | CSE  | Erode  | moorthi    |    99 | NULL    |
++-----------+----------+------+--------+------------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> use tejesh;
+Database changed
+mysql> select*from mentees;
++------------+----------+------+----------+------------+-------+---------+
+| Regno      | Name     | Dept | Addess   | Fathername | marks | subject |
++------------+----------+------+----------+------------+-------+---------+
+|  192125122 | kamalesh | CSE  | Erode    | moorthi    |    99 | NULL    |
+| 1922115936 | guru     | BME  | piler    | murthy     |    89 | BIOEVS  |
+| 1922115936 | Dhora    | BME  | chittoor | Ramu       |    89 | BIOEVS  |
+| 1922114856 | Jithu    | CSE  | mpl      | Ashok      |    99 | NULL    |
++------------+----------+------+----------+------------+-------+---------+
+4 rows in set (0.00 sec)
+
+mysql> create table mdept(Deptid int(5),Deptname varchar(20),Rollno int(10));
+Query OK, 0 rows affected, 2 warnings (0.15 sec)
+
+mysql> insert into mdept values(1,"CSE",192125122);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into mdept values(2,"BME",1922115936);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> update mdept set Deptid=3 where Rollno=1922115936);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> update mdept set Deptid=3 where Rollno=1922114856);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> select*from mdept;
++--------+----------+------------+
+| Deptid | Deptname | Rollno     |
++--------+----------+------------+
+|      1 | CSE      |  192125122 |
+|      2 | BME      | 1922115936 |
++--------+----------+------------+
+2 rows in set (0.05 sec)
+
+mysql> select Deptid,Deptname,Rollno from mdept,mentees whereere mentee;     eg
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mentees.R' at line 1
+mysql> select Deptid,Deptname fro mdept,mentees.Regno=mdept.Rollno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mdept,mentees.Regno=mdept.Rollno' at line 1
+mysql> select Deptid,Deptname from mdept,mentees.Regno=mdept.Rollno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=mdept.Rollno' at line 1
+mysql> select Deptid,DeptnameRollno from mdept m,mentees m1 where m1.Regno=m.Rollno;
+ERROR 1054 (42S22): Unknown column 'DeptnameRollno' in 'field list'
+mysql>  select Deptid,Deptname,Rollno from mdept m,mentees m1 where m1.Regno=m.Rollno;
++--------+----------+------------+
+| Deptid | Deptname | Rollno     |
++--------+----------+------------+
+|      1 | CSE      |  192125122 |
+|      2 | BME      | 1922115936 |
+|      2 | BME      | 1922115936 |
++--------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select Name,Deptid,Deptname,Rollno from mdept, metees where mentees.Regno=mdept.Rollno;
+ERROR 1146 (42S02): Table 'tejesh.metees' doesn't exist
+mysql> select Name,Deptid,Deptname,Rollno from mdept, mentees where mentees.Regno=mdept.Rollno;
++----------+--------+----------+------------+
+| Name     | Deptid | Deptname | Rollno     |
++----------+--------+----------+------------+
+| kamalesh |      1 | CSE      |  192125122 |
+| guru     |      2 | BME      | 1922115936 |
+| Dhora    |      2 | BME      | 1922115936 |
++----------+--------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select Rollno,Deptname,Name,Addess from mdept left outer join mentees on mdept.Rollno=mentees.Regno;
++------------+----------+----------+----------+
+| Rollno     | Deptname | Name     | Addess   |
++------------+----------+----------+----------+
+|  192125122 | CSE      | kamalesh | Erode    |
+| 1922115936 | BME      | Dhora    | chittoor |
+| 1922115936 | BME      | guru     | piler    |
++------------+----------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql>  select Rollno,Deptname,Name,Addess from mdept right outer join mentees on mdept.Rollno=mentees.Regno;
++------------+----------+----------+----------+
+| Rollno     | Deptname | Name     | Addess   |
++------------+----------+----------+----------+
+|  192125122 | CSE      | kamalesh | Erode    |
+| 1922115936 | BME      | guru     | piler    |
+| 1922115936 | BME      | Dhora    | chittoor |
+|       NULL | NULL     | Jithu    | mpl      |
++------------+----------+----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> insert into mdept values(4,"ENE",192125122;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> insert into mdept values(4,"ENE",192125122);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into mdept  values (5,"COM",1922115936);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select Rollno,Deptname,Name,Addess from mdept right outer join mentees on mdept.Rollno=mentees.Regno;
++------------+----------+----------+----------+
+| Rollno     | Deptname | Name     | Addess   |
++------------+----------+----------+----------+
+|  192125122 | ENE      | kamalesh | Erode    |
+|  192125122 | CSE      | kamalesh | Erode    |
+| 1922115936 | COM      | guru     | piler    |
+| 1922115936 | BME      | guru     | piler    |
+| 1922115936 | COM      | Dhora    | chittoor |
+| 1922115936 | BME      | Dhora    | chittoor |
+|       NULL | NULL     | Jithu    | mpl      |
++------------+----------+----------+----------+
+7 rows in set (0.00 sec)
+
+mysql>

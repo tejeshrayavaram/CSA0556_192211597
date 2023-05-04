@@ -1,0 +1,84 @@
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use tejesh;
+Database changed
+mysql> create table faculty(facid int(20),facname varchar(20),facdept varchar(10),salary int(20));
+Query OK, 0 rows affected, 2 warnings (4.49 sec)
+
+mysql> desc faculty;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| facid   | int         | YES  |     | NULL    |       |
+| facname | varchar(20) | YES  |     | NULL    |       |
+| facdept | varchar(10) | YES  |     | NULL    |       |
+| salary  | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (3.65 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_tejesh |
++------------------+
+| faculty          |
++------------------+
+1 row in set (0.45 sec)
+
+mysql> create table student(Rollno int(20),Name varchar(20),Gender varchar(20),Dob varchar(10),Mobileno int(10),City varchar(20),District varchar(20),dept varchar(5));
+Query OK, 0 rows affected, 2 warnings (0.09 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Rollno   | int         | YES  |     | NULL    |       |
+| Name     | varchar(20) | YES  |     | NULL    |       |
+| Gender   | varchar(20) | YES  |     | NULL    |       |
+| Dob      | varchar(10) | YES  |     | NULL    |       |
+| Mobileno | int         | YES  |     | NULL    |       |
+| City     | varchar(20) | YES  |     | NULL    |       |
+| District | varchar(20) | YES  |     | NULL    |       |
+| dept     | varchar(5)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into student values(192211597,"tejesh","male","15-5-2004",9789836736,"tirupati","thirupathi","CSEEE");
+ERROR 1264 (22003): Out of range value for column 'Mobileno' at row 1
+mysql> insert into student values(192211597,"tejesh","male","15-5-2004",9,"tirupati","thirupathi","CSEEE");
+Query OK, 1 row affected (0.47 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Rollno   | int         | YES  |     | NULL    |       |
+| Name     | varchar(20) | YES  |     | NULL    |       |
+| Gender   | varchar(20) | YES  |     | NULL    |       |
+| Dob      | varchar(10) | YES  |     | NULL    |       |
+| Mobileno | int         | YES  |     | NULL    |       |
+| City     | varchar(20) | YES  |     | NULL    |       |
+| District | varchar(20) | YES  |     | NULL    |       |
+| dept     | varchar(5)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select*from student;
++-----------+--------+--------+-----------+----------+----------+------------+-------+
+| Rollno    | Name   | Gender | Dob       | Mobileno | City     | District   | dept  |
++-----------+--------+--------+-----------+----------+----------+------------+-------+
+| 192211597 | tejesh | male   | 15-5-2004 |        9 | tirupati | thirupathi | CSEEE |
++-----------+--------+--------+-----------+----------+----------+------------+-------+
+1 row in set (0.13 sec)
+
+mysql>

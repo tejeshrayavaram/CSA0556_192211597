@@ -1,0 +1,55 @@
+
+mysql> use tejesh
+Database changed
+mysql> select*from mentees;
++------------+----------+------+----------+------------+
+| Regno      | Name     | Dept | Addess   | Fathername |
++------------+----------+------+----------+------------+
+|  192125122 | kamalesh | CSE  | Erode    | moorthi    |
+| 1922115936 | guru     | CSE  | piler    | murthy     |
+| 1922115936 | Dhora    | CSE  | chittoor | Ramu       |
+| 1922115632 | Babu     | CSE  | kallur   | ramesh     |
+| 1922114856 | Jithu    | CSE  | mpl      | Ashok      |
++------------+----------+------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> update mentees set Dept="BME" where Regno=1922115936;
+Query OK, 2 rows affected (0.12 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select*from mentees;
++------------+----------+------+----------+------------+
+| Regno      | Name     | Dept | Addess   | Fathername |
++------------+----------+------+----------+------------+
+|  192125122 | kamalesh | CSE  | Erode    | moorthi    |
+| 1922115936 | guru     | BME  | piler    | murthy     |
+| 1922115936 | Dhora    | BME  | chittoor | Ramu       |
+| 1922115632 | Babu     | CSE  | kallur   | ramesh     |
+| 1922114856 | Jithu    | CSE  | mpl      | Ashok      |
++------------+----------+------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> delete from mentees fathername="ramesh";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '="ramesh"' at line 1
+mysql> delete from mentees where father name="ramesh";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name="ramesh"' at line 1
+mysql> delete from mentees where fathername="ramesh";
+Query OK, 1 row affected (0.13 sec)
+
+mysql> selete*from mentees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selete*from mentees' at line 1
+mysql> selete* from mentees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selete* from mentees' at line 1
+mysql> select*from mentees;
++------------+----------+------+----------+------------+
+| Regno      | Name     | Dept | Addess   | Fathername |
++------------+----------+------+----------+------------+
+|  192125122 | kamalesh | CSE  | Erode    | moorthi    |
+| 1922115936 | guru     | BME  | piler    | murthy     |
+| 1922115936 | Dhora    | BME  | chittoor | Ramu       |
+| 1922114856 | Jithu    | CSE  | mpl      | Ashok      |
++------------+----------+------+----------+------------+
+4 rows in set (0.00 sec)
+
+mysql>
+mysql>

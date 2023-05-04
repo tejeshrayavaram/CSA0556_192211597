@@ -1,0 +1,85 @@
+
+mysql> use tejesh
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_tejesh |
++------------------+
+| department       |
+| mdept            |
+| mentees          |
+| mentees1         |
+| student          |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from mentees;
++------------+----------+------+----------+------------+-------+---------+
+| Regno      | Name     | Dept | Addess   | Fathername | marks | subject |
++------------+----------+------+----------+------------+-------+---------+
+|  192125122 | kamalesh | CSE  | Erode    | moorthi    |    99 | NULL    |
+| 1922115936 | guru     | BME  | piler    | murthy     |    89 | BIOEVS  |
+| 1922115936 | Dhora    | BME  | chittoor | Ramu       |    89 | BIOEVS  |
+| 1922114856 | Jithu    | CSE  | mpl      | Ashok      |    99 | NULL    |
++------------+----------+------+----------+------------+-------+---------+
+4 rows in set (0.00 sec)
+
+mysql> create view marks_view as select subject,marks from mentees;
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> select*from marks_view;
++---------+-------+
+| subject | marks |
++---------+-------+
+| NULL    |    99 |
+| BIOEVS  |    89 |
+| BIOEVS  |    89 |
+| NULL    |    99 |
++---------+-------+
+4 rows in set (0.06 sec)
+
+mysql> create index subject on mentees(subject);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show index from mentees;
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table   | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| mentees |          1 | subject  |            1 | subject     | A         |           2 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+1 row in set (0.15 sec)
+
+mysql> create table per(pid int NOT NULL AUTO_INCREMENT,Name varchar(50),Age int(3),PRIMARY KEY(pid));
+Query OK, 0 rows affected, 1 warning (0.16 sec)
+
+mysql> desc per;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| pid   | int         | NO   | PRI | NULL    | auto_increment |
+| Name  | varchar(50) | YES  |     | NULL    |                |
+| Age   | int         | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> alter table per AUTO_INCREMENT=100;
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into per(Name,Age)("kamaleh",30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"kamaleh",30)' at line 1
+mysql> insert into per(Name,Age)("kamalesh",30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"kamalesh",30)' at line 1
+mysql> insert into per(Name,Age) values ("kamalesh",30);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select*from per;
++-----+----------+------+
+| pid | Name     | Age  |
++-----+----------+------+
+| 100 | kamalesh |   30 |
++-----+----------+------+
+1 row in set (0.00 sec)
+
+mysql>
